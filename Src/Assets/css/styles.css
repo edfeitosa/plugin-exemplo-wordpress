@@ -1,0 +1,109 @@
+.cabecalho-plugin {
+  padding: 5px 0px 5px 20px;
+  margin-left: -20px;
+  background-color: #009842;
+  color: #FFCF28; }
+
+.content-plugin {
+  color: #333; }
+  .content-plugin h1 {
+    font-weight: 700;
+    color: #666; }
+  .content-plugin p {
+    margin-bottom: 10px; }
+  .content-plugin .titulo-input {
+    font-size: 0.85rem;
+    font-weight: 700;
+    color: #666;
+    margin-bottom: 5px; }
+  .content-plugin .input-text {
+    border: 1px solid #ccc;
+    background-color: #fff;
+    padding: 3px 5px;
+    width: 50%; }
+  .content-plugin .input-button {
+    background-color: #009842;
+    color: #fff;
+    font-size: 0.85rem;
+    font-weight: 700;
+    border: none;
+    width: 120px;
+    padding: 5px 0px 9px 0px;
+    border-radius: 4px;
+    margin: 15px 10px 0px 0px;
+    float: left;
+    cursor: pointer; }
+  .content-plugin .cancel-button {
+    background-color: #ccc;
+    color: #666;
+    font-size: 0.85rem;
+    font-weight: 700;
+    border: none;
+    width: 120px;
+    padding: 5px 0px 9px 0px;
+    border-radius: 4px;
+    margin: 15px 10px 0px 0px;
+    float: left;
+    cursor: pointer; }
+
+.bg-modal {
+  background-color: rgba(0, 0, 0, 0.5);
+  position: fixed;
+  width: 90%;
+  height: 100%;
+  z-index: 100;
+  margin-left: -20px;
+  display: none;
+  align-items: center;
+  justify-content: center; }
+  .bg-modal .modal {
+    width: 300px;
+    height: 200px;
+    border-radius: 5px;
+    background-color: #fff;
+    box-shadow: 2px 2px 5px rgba(50, 50, 50, 0.3);
+    overflow: hidden;
+    display: flex;
+    flex-direction: column;
+    justify-content: space-between;
+    border: 3px solid #ccc; }
+    .bg-modal .modal .cabecalho-sucesso {
+      background-color: #009842;
+      font-weight: 700;
+      font-size: 1.1rem;
+      color: #fff;
+      width: 100%;
+      padding: 15px; }
+    .bg-modal .modal .cabecalho-alerta {
+      background-color: #ffcf28;
+      font-weight: 700;
+      font-size: 1.1rem;
+      color: #fff;
+      width: 100%;
+      padding: 15px; }
+    .bg-modal .modal .cabecalho-erro {
+      background-color: #f00;
+      font-weight: 700;
+      font-size: 1.1rem;
+      color: #fff;
+      width: 100%;
+      padding: 15px; }
+    .bg-modal .modal .body {
+      padding: 0px 15px; }
+    .bg-modal .modal .footer {
+      padding: 0px 10px 15px 15px;
+      display: flex;
+      justify-content: flex-end; }
+      .bg-modal .modal .footer .button {
+        font-size: 0.85rem;
+        font-weight: 700;
+        border: none;
+        width: 120px;
+        padding: 5px 0px 9px 0px;
+        border-radius: 4px;
+        margin: 15px 10px 0px 0px;
+        float: left;
+        cursor: pointer;
+        background-color: #ccc;
+        color: #666;
+        padding: 0px; }

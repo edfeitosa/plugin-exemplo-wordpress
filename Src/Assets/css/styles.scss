@@ -1,0 +1,130 @@
+$verde: #009842;
+$vermelho: #f00;
+$amarelo: #ffcf28;
+$cinza-claro: #ccc;
+$cinza: #666;
+$cinza-escuro: #333;
+
+@mixin button() {
+	font-size: 0.85rem;
+	font-weight: 700;
+	border: none;
+	width: 120px;
+	padding: 5px 0px 9px 0px;
+	border-radius: 4px;
+	margin: 15px 10px 0px 0px;
+	float: left;
+	cursor: pointer;
+}
+
+.cabecalho-plugin {
+	padding: 5px 0px 5px 20px;
+	margin-left: -20px;
+	background-color: $verde;
+	color: #FFCF28;
+}
+
+.content-plugin {
+	color: $cinza-escuro;
+	
+	h1 {
+		font-weight: 700;
+		color: $cinza;
+	}
+	
+	p {
+		margin-bottom: 10px;
+	}
+	
+	.titulo-input {
+		font-size: 0.85rem;
+		font-weight: 700;
+		color: $cinza;
+		margin-bottom: 5px;
+	}
+	
+	.input-text {
+		border: 1px solid $cinza-claro;
+		background-color: #fff;
+		padding: 3px 5px;
+		width: 50%;
+	}
+	
+	.input-button {
+		background-color: $verde;
+		color: #fff;
+		@include button();
+	}
+	
+	.cancel-button {
+		background-color: $cinza-claro;
+		color: $cinza;
+		@include button();
+	}
+}
+
+.bg-modal {
+	background-color: rgba(0, 0, 0, 0.5);
+	position: fixed;
+	width: 90%;
+	height: 100%;
+	z-index: 100;
+	margin-left: -20px;
+	display: none;
+	align-items: center;
+	justify-content: center;
+	
+	.modal {
+		width: 300px;
+		height: 200px;
+		border-radius: 5px;
+		background-color: #fff;
+		box-shadow: 2px 2px 5px rgba(50, 50, 50, 0.3);
+		overflow: hidden;
+		display: flex;
+		flex-direction: column;
+		justify-content: space-between;
+		border: 3px solid $cinza-claro;
+		
+		@mixin cabecalho() {
+			font-weight: 700;
+			font-size: 1.1rem;
+			color: #fff;
+			width: 100%;
+			padding: 15px;
+		}
+		
+		.cabecalho-sucesso {
+			background-color: $verde;
+			@include cabecalho();
+		}
+		
+		.cabecalho-alerta {
+			background-color: $amarelo;
+			@include cabecalho();
+		}
+		
+		.cabecalho-erro {
+			background-color: $vermelho;
+			@include cabecalho();
+		}
+		
+		.body {
+			padding: 0px 15px;
+		}
+		
+		.footer {
+			padding: 0px 10px 15px 15px;
+			display: flex;
+			justify-content: flex-end;
+			
+			.button {
+				@include button();
+				background-color: $cinza-claro;
+				color: $cinza;
+				padding: 0px;
+			}
+		}
+		
+	}
+}
