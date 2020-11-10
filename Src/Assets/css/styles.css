@@ -65,8 +65,7 @@
     overflow: hidden;
     display: flex;
     flex-direction: column;
-    justify-content: space-between;
-    border: 3px solid #ccc; }
+    justify-content: space-between; }
     .bg-modal .modal .cabecalho-sucesso {
       background-color: #009842;
       font-weight: 700;
