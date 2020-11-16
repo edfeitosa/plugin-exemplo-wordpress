@@ -7,6 +7,7 @@ use Interfaces\IEdicao;
 use Libs\Input;
 use Libs\Select;
 use Libs\Hidden;
+use Libs\Button;
 
 class Edicao implements IEdicao {
 	
@@ -36,10 +37,11 @@ class Edicao implements IEdicao {
 	}
 	
 	private static function button($titulo, $name, $id, $class = 'input-button') {
-		$html = "
-			<button name='" . $name . "' id='" . $id . "' class='" . $class . "'>" . $titulo . "</button>
-		";
-		return $html;
+		Button::setTitulo($titulo);
+		Button::setName($name);
+		Button::setId($id);
+		Button::setClass($class);
+		return Button::button();
 	}
 	
 	private static function servidor() {
