@@ -115,33 +115,19 @@ add_action(
 
 function autorizacao() { Source\Sites::autorizacao(); }
 
-function listar_teste() {
-
-	$response = wp_remote_get("http://localhost/estudo-plugins-wordpress/wp-json/localiza/v1/users");
-
-	echo $response['body'];
-
-}
-
-add_action('wp_head', 'listar_teste');
-
-apply_filters('rest_endpoints', function($endpoints) {
-	
-	/* if ( isset( $endpoints['/wp/v2/users/(?P<id>[\d]+)'] ) ) {
-		unset($endpoints['/wp/v2/users/(?P<id>[\d]+)'] );
-	} */
-
-	if (in_array("/users", $endpoints['/wp/v2'])) { 
-    echo "Tem users";
-	}
-
-	if (isset($endpoints['/wp/v2/users'])) {
-		// unset($endpoints['/wp/v2/users']);
-	}
-	if (isset( $endpoints['/wp/v2/users/(?P<id>[\d]+)'] ) ) {
-		// unset($endpoints['/wp/v2/users/(?P<id>[\d]+)'] );
+function desabilita_api_padrao($endpoints) {
+	$apis = array('posts', 'pages', 'comments', 'users', 'media');
+	for($i = 0; $i < count($apis); $i++) {
+		if (isset($endpoints['/wp/v2/' . $apis[$i]])) {
+			unset($endpoints['/wp/v2/' . $apis[$i]]);
+		}
+		if (isset( $endpoints['/wp/v2/' .  $apis[$i] . '/(?P<id>[\d]+)'] ) ) {
+			unset($endpoints['/wp/v2/' .  $apis[$i] . '/(?P<id>[\d]+)'] );
+		}
 	}
 	return $endpoints;
-});
+}
+
+add_filter('rest_endpoints', 'desabilita_api_padrao');
 
 ?>
