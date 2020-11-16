@@ -4,7 +4,7 @@ namespace Source;
 class Sites {
 	
 	public static function autorizacao() {
-		// http://localhost/estudos-plugins-wordpress/wp-json/liberasite/v1/autorizacao?id=2344
+		// http://localhost/estudo-plugins-wordpress/wp-json/liberasite/v1/autorizacao?id=9
 		$id = $_REQUEST['id'];
 		
 		http_response_code(201);

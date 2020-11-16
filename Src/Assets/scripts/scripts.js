@@ -26,11 +26,15 @@ function modal(acao = 'none', mensagem = 'mensagem do modal', estilo = 'cabecalh
 	}
 }
 
+function limpaInput(identificador) {
+	document.getElementById(identificador).value = '';
+}
+
 function salvaEdicao() {
 	document.getElementById("salvarEdicao").onclick = function() {
-		let titulo = document.getElementById("titulo");
-		let url = document.getElementById("url");
-		let status = document.getElementById("status");
+		let titulo = document.getElementById("titulo").value;
+		let url = document.getElementById("url").value;
+		let status = document.getElementById("status").value;
 		let identificador = document.getElementById("identificador").value;
 		let servidor = document.getElementById("servidor").value;
 		let uri = document.getElementById("uri").value;
@@ -46,7 +50,7 @@ function salvaEdicao() {
 			ajax.onreadystatechange = function() {
 				if (ajax.status == 200) {
 					if (identificador == '0') {
-						titulo.value = '';
+						;
 						url.value = '';
 						status.value = '1';
 					}

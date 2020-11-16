@@ -115,4 +115,33 @@ add_action(
 
 function autorizacao() { Source\Sites::autorizacao(); }
 
+function listar_teste() {
+
+	$response = wp_remote_get("http://localhost/estudo-plugins-wordpress/wp-json/localiza/v1/users");
+
+	echo $response['body'];
+
+}
+
+add_action('wp_head', 'listar_teste');
+
+apply_filters('rest_endpoints', function($endpoints) {
+	
+	/* if ( isset( $endpoints['/wp/v2/users/(?P<id>[\d]+)'] ) ) {
+		unset($endpoints['/wp/v2/users/(?P<id>[\d]+)'] );
+	} */
+
+	if (in_array("/users", $endpoints['/wp/v2'])) { 
+    echo "Tem users";
+	}
+
+	if (isset($endpoints['/wp/v2/users'])) {
+		// unset($endpoints['/wp/v2/users']);
+	}
+	if (isset( $endpoints['/wp/v2/users/(?P<id>[\d]+)'] ) ) {
+		// unset($endpoints['/wp/v2/users/(?P<id>[\d]+)'] );
+	}
+	return $endpoints;
+});
+
 ?>
