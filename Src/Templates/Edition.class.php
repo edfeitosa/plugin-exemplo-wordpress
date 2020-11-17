@@ -3,13 +3,14 @@ namespace Templates;
 
 use Shared\Header;
 use Source\Sites;
-use Interfaces\IEdicao;
+use Interfaces\IEdition;
+use Libs\Modal;
 use Libs\Input;
 use Libs\Select;
 use Libs\Hidden;
 use Libs\Button;
 
-class Edicao implements IEdicao {
+class Edition implements IEdition {
 	
 	public static function input($titulo, $name, $id, $value = '', $class = 'input-text') {
 		Input::setTitulo($titulo);
@@ -52,7 +53,7 @@ class Edicao implements IEdicao {
 		return strval($_SERVER['REQUEST_URI']);
 	}
 	
-	private static function identificador() {
+	private static function identificator() {
 		return (empty($_GET['id'])) ? '0' : $_GET['id'];
 	}
 	
@@ -61,7 +62,7 @@ class Edicao implements IEdicao {
 			[ "value" => "1", "option" => "Sim" ],
 			[ "value" => "0", "option" => "Não" ]
 		);
-		$html = Modal::padrao() .
+		$html = Modal::modal() .
 			"<div class='content-plugin'>
 				" . Header::header() . "
 				<h1>Adicionando novo site</h1>
@@ -69,7 +70,7 @@ class Edicao implements IEdicao {
 				" . self::input('Título do site', 'titulo', 'titulo') . "
 				" . self::input('Url do site', 'url', 'url') . "
 				" . self::select('Deve estar ativo?', 'status', 'status', $data_select) . "
-				" . self::hidden('identificador', self::identificador()) . "
+				" . self::hidden('identificador', self::identificator()) . "
 				" . self::hidden('servidor', self::servidor()) . "
 				" . self::hidden('uri', self::uri()) . "
 				" . self::button('Salvar', 'salvarEdicao', 'salvarEdicao') . "
@@ -79,12 +80,12 @@ class Edicao implements IEdicao {
 		return $html;
 	}
 	
-	public static function novo() {
-		Sites::adiciona();
+	public static function new() {
+		Sites::insert();
 		echo self::html();
 	}
 	
-	public static function edicao() {
+	public static function edition() {
 		echo self::html();
 	}
 	

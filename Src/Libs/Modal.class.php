@@ -1,9 +1,11 @@
 <?php 
-namespace Templates;
+namespace Libs;
 
-class Modal {
+use Interfaces\IModal;
+
+class Modal implements IModal {
 	
-	public static function padrao() {
+	public static function modal() {
 		$html = "
 			<div id='bg-modal' class='bg-modal'>
 				<div class='modal'>

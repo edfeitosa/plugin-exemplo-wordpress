@@ -3,7 +3,7 @@ namespace Source;
 
 class Sites {
 	
-	public static function autorizacao() {
+	public static function auth() {
 		// http://localhost/estudo-plugins-wordpress/wp-json/liberasite/v1/autorizacao?id=9
 		$id = $_REQUEST['id'];
 		
@@ -15,7 +15,7 @@ class Sites {
 		));
 	}
 	
-	public static function adiciona() {
+	public static function insert() {
 		global $wpdb;
 		if (isset($_POST['titulo'])) {
 			$wpdb->insert(

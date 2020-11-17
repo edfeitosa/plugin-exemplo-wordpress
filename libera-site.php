@@ -81,7 +81,7 @@ function add_custom_menu_item() {
 		'Libera Site',
 		'manage_options',
 		'consultar',
-		'consulta',
+		'consultation',
 		'dashicons-privacy'
 	);
 	add_submenu_page(
@@ -90,13 +90,13 @@ function add_custom_menu_item() {
 		'Novo',
 		'manage_options',
 		'editar',
-		'novo'
+		'new_edition'
 	);
 }
 
-function novo() { Templates\Edicao::novo(); }
+function new_edition() { Templates\Edition::new(); }
 
-function consulta() { Templates\Consulta::home(); }
+function consultation() { Templates\Consultation::home(); }
 
 // adiciona novo endpoint
 add_action(
@@ -107,15 +107,15 @@ add_action(
 			'/autorizacao',
 			array(
 				'methods' => 'GET',
-				'callback' => 'autorizacao'
+				'callback' => 'auth'
 			)
 		);
 	}
 );
 
-function autorizacao() { Source\Sites::autorizacao(); }
+function auth() { Source\Sites::auth(); }
 
-function desabilita_api_padrao($endpoints) {
+function disables_wordpress_api($endpoints) {
 	$apis = array('posts', 'pages', 'comments', 'users', 'media');
 	for($i = 0; $i < count($apis); $i++) {
 		if (isset($endpoints['/wp/v2/' . $apis[$i]])) {
@@ -128,6 +128,6 @@ function desabilita_api_padrao($endpoints) {
 	return $endpoints;
 }
 
-add_filter('rest_endpoints', 'desabilita_api_padrao');
+add_filter('rest_endpoints', 'disables_wordpress_api');
 
 ?>

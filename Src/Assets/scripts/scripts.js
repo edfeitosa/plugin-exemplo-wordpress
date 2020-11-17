@@ -1,10 +1,10 @@
 "use strict";
 
-function redirecionamento(url) {
+function redirect(url) {
 	window.location.href = url;
 }
 
-function substituirTermo(texto, termo_antigo, termo_novo) {
+function changeTerm(texto, termo_antigo, termo_novo) {
 	return texto.replace(termo_antigo, termo_novo);
 }
 
@@ -26,11 +26,11 @@ function modal(acao = 'none', mensagem = 'mensagem do modal', estilo = 'cabecalh
 	}
 }
 
-function limpaInput(identificador) {
+function clearInput(identificador) {
 	document.getElementById(identificador).value = '';
 }
 
-function salvaEdicao() {
+function salveEdition() {
 	document.getElementById("salvarEdicao").onclick = function() {
 		let titulo = document.getElementById("titulo").value;
 		let url = document.getElementById("url").value;
@@ -55,7 +55,7 @@ function salvaEdicao() {
 						status.value = '1';
 					}
 					modal('flex', 'Os dados foram salvos com sucesso', 'cabecalho-sucesso');
-					voltaParaConsulta('fechar');
+					backToConsultation('fechar');
 				} else {
 					modal('flex', 'Ocorreu um erro e não possível salvar', 'cabecalho-erro');
 				}
@@ -64,18 +64,18 @@ function salvaEdicao() {
 	}
 }
 
-function voltaParaConsulta(identificador) {
+function backToConsultation(identificador) {
 	document.getElementById(identificador).onclick = function() {
 		let servidor = document.getElementById("servidor").value;
 		let uri = document.getElementById("uri").value;
 		let url_atual = servidor + uri;
-		let url_nova = substituirTermo(url_atual, "editar", "consultar");
-		redirecionamento(url_nova);
+		let url_nova = changeTerm(url_atual, "editar", "consultar");
+		redirect(url_nova);
 	}
 }
 
 window.onload = function() {
 	modal();
-	salvaEdicao();
-	voltaParaConsulta('cancelarEdicao');
+	salveEdition();
+	backToConsultation('cancelarEdicao');
 }
