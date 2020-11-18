@@ -7,6 +7,7 @@ use Interfaces\IEdition;
 use Libs\Modal;
 use Libs\Input;
 use Libs\Select;
+use Libs\Checkbox;
 use Libs\Hidden;
 use Libs\Button;
 
@@ -29,6 +30,14 @@ class Edition implements IEdition {
 		Select::setValue($value);
 		Select::setClass($class);
 		return Select::select();
+	}
+
+	private static function checkbox($titulo, $options, $value = array(), $class = 'input-checkbox') {
+		Checkbox::setTitulo($titulo);
+		Checkbox::setOptions($options);
+		Checkbox::setValue($value);
+		Checkbox::setClass($class);
+		return Checkbox::checkbox();
 	}
 	
 	private static function hidden($id, $value) {
@@ -56,20 +65,32 @@ class Edition implements IEdition {
 	private static function identificator() {
 		return (empty($_GET['id'])) ? '0' : $_GET['id'];
 	}
-	
-	private static function html() {
-		$data_select = array(
+
+	private static function optionsSelect() {
+		return array(
 			[ "value" => "1", "option" => "Sim" ],
 			[ "value" => "0", "option" => "Não" ]
 		);
+	}
+
+	private static function optionsCheckbox() {
+		return array(
+			[ "value" => "post", "label" => "Post", "id" => "post", "name" => "post" ],
+			[ "value" => "page", "label" => "Page", "id" => "page", "name" => "page" ],
+			[ "value" => "media", "label" => "Mídia", "id" => "media", "name" => "media" ]
+		);
+	}
+	
+	private static function html() {
 		$html = Modal::modal() .
 			"<div class='content-plugin'>
 				" . Header::header() . "
 				<h1>Adicionando novo site</h1>
 				<p>Preencha as informações do novo bloqueio</p>
-				" . self::input('Título do site', 'titulo', 'titulo') . "
-				" . self::input('Url do site', 'url', 'url') . "
-				" . self::select('Deve estar ativo?', 'status', 'status', $data_select) . "
+				" . self::input('Título do site (*)', 'titulo', 'titulo') . "
+				" . self::input('Url do site (*)', 'url', 'url') . "
+				" . self::select('Deve estar ativo?', 'status', 'status', self::optionsSelect()) . "
+				" . self::checkbox('O que pode ser acessado?', self::optionsCheckbox()) . "
 				" . self::hidden('identificador', self::identificator()) . "
 				" . self::hidden('servidor', self::servidor()) . "
 				" . self::hidden('uri', self::uri()) . "

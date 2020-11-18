@@ -59,20 +59,24 @@ class Select implements ISelect {
 	public static function setOptions($voptions) {
 		self::$options = $voptions;
 	}
-	
-	public static function select() {
+
+	private static function optionsSelect() {
 		$options_value = "";
 		foreach(self::getOptions() as $item) {
 			$selected = ($item["value"] == self::getValue()) ? 'selected' : '';
 			$options_value .= "<option value='" . $item["value"] . "' " . $selected . ">" . $item["option"] . "</option>";
 		}
+		return $options_value;
+	}
+	
+	public static function select() {
 		$html = "
 			<p>
 				<div class='titulo-input'>
 					" . self::getTitulo() . "
 				</div>
 				<select type='submit' name='" . self::getName() . "' id='" . self::getId() . "' class='" . self::getClass() . "' />
-					" . $options_value . "
+					" . self::optionsSelect() . "
 				</select>
 			</p>
 		";

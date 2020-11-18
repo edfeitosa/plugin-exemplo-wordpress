@@ -37,6 +37,7 @@ function sites_table($table_data) {
 		`sit_auth_code` varchar(255) NOT NULL,
 		`sit_status` tinyint(1) NOT NULL DEFAULT 1,
 		`sit_user` varchar(100) NOT NULL,
+		`sit_resources` json,
 		`sit_date` timestamp NOT NULL DEFAULT CURRENT_TIMESTAMP
 	) ' . $table_data['charset'] . ';';
 }
