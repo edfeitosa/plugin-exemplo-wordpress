@@ -19,8 +19,8 @@ class Edition implements IEdition {
 	);
 
 	private static $optionsCheckbox = array(
-		[ "value" => "post", "label" => "Post", "id" => "post", "name" => "post" ],
-		[ "value" => "page", "label" => "Page", "id" => "page", "name" => "page" ],
+		[ "value" => "post", "label" => "Posts", "id" => "post", "name" => "post" ],
+		[ "value" => "page", "label" => "Páginas", "id" => "page", "name" => "page" ],
 		[ "value" => "media", "label" => "Mídia", "id" => "media", "name" => "media" ]
 	);
 

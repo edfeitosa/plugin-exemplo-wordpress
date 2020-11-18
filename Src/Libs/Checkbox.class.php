@@ -60,7 +60,9 @@ class Checkbox implements ICheckbox {
 				<div class='titulo-input'>
 					" . self::getTitulo() . "
 				</div>
-				" . self::optionsCheckbox() . "
+				<div class='itens-checkbox'>
+					" . self::optionsCheckbox() . "
+				</div>
 			</p>
 		";
 		return $html;
