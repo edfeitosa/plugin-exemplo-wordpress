@@ -12,6 +12,25 @@ use Libs\Hidden;
 use Libs\Button;
 
 class Edition implements IEdition {
+
+	private static $optionsSelect = array(
+		[ "value" => "1", "option" => "Sim" ],
+		[ "value" => "0", "option" => "Não" ]
+	);
+
+	private static $optionsCheckbox = array(
+		[ "value" => "post", "label" => "Post", "id" => "post", "name" => "post" ],
+		[ "value" => "page", "label" => "Page", "id" => "page", "name" => "page" ],
+		[ "value" => "media", "label" => "Mídia", "id" => "media", "name" => "media" ]
+	);
+
+	private static function getOptionsSelect() {
+		return self::$optionsSelect;
+	}
+
+	private static function getOptionsCheckbox() {
+		return self::$optionsCheckbox;
+	}
 	
 	public static function input($titulo, $name, $id, $value = '', $class = 'input-text') {
 		Input::setTitulo($titulo);
@@ -65,21 +84,6 @@ class Edition implements IEdition {
 	private static function identificator() {
 		return (empty($_GET['id'])) ? '0' : $_GET['id'];
 	}
-
-	private static function optionsSelect() {
-		return array(
-			[ "value" => "1", "option" => "Sim" ],
-			[ "value" => "0", "option" => "Não" ]
-		);
-	}
-
-	private static function optionsCheckbox() {
-		return array(
-			[ "value" => "post", "label" => "Post", "id" => "post", "name" => "post" ],
-			[ "value" => "page", "label" => "Page", "id" => "page", "name" => "page" ],
-			[ "value" => "media", "label" => "Mídia", "id" => "media", "name" => "media" ]
-		);
-	}
 	
 	private static function html() {
 		$html = Modal::modal() .
@@ -88,9 +92,8 @@ class Edition implements IEdition {
 				<h1>Adicionando novo site</h1>
 				<p>Preencha as informações do novo bloqueio</p>
 				" . self::input('Título do site (*)', 'titulo', 'titulo') . "
-				" . self::input('Url do site (*)', 'url', 'url') . "
-				" . self::select('Deve estar ativo?', 'status', 'status', self::optionsSelect()) . "
-				" . self::checkbox('O que pode ser acessado?', self::optionsCheckbox()) . "
+				" . self::select('Deve estar ativo?', 'status', 'status', self::getOptionsSelect()) . "
+				" . self::checkbox('O que pode ser acessado? (*)', self::getOptionsCheckbox()) . "
 				" . self::hidden('identificador', self::identificator()) . "
 				" . self::hidden('servidor', self::servidor()) . "
 				" . self::hidden('uri', self::uri()) . "

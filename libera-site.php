@@ -33,7 +33,6 @@ function sites_table($table_data) {
 	return 'CREATE TABLE IF NOT EXISTS ' . $table_data['sites'] . ' (
 		`sit_id` int(11) AUTO_INCREMENT PRIMARY KEY,
 		`sit_title` varchar(255) NOT NULL,
-		`sit_url` varchar(255) NOT NULL,
 		`sit_auth_code` varchar(255) NOT NULL,
 		`sit_status` tinyint(1) NOT NULL DEFAULT 1,
 		`sit_user` varchar(100) NOT NULL,
