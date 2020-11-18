@@ -26,8 +26,12 @@ function modal(acao = 'none', mensagem = 'mensagem do modal', estilo = 'cabecalh
 	}
 }
 
-function clearInput(identificador) {
-	document.getElementById(identificador).value = '';
+function clearInput(identificador, value) {
+	document.getElementById(identificador).value = value;
+}
+
+function clearChecked(identificador) {
+	document.getElementById(identificador).checked = false;
 }
 
 function salveEdition() {
@@ -38,21 +42,37 @@ function salveEdition() {
 		let identificador = document.getElementById("identificador").value;
 		let servidor = document.getElementById("servidor").value;
 		let uri = document.getElementById("uri").value;
+		let post = document.getElementById("post");
+		let page = document.getElementById("page");
+		let media = document.getElementById("media");
+		let resources = [];
+		post.checked && resources.push(post.value);
+		page.checked && resources.push(page.value);
+		media.checked && resources.push(media.value);
 
-		if (titulo == '' || url == '') {
+		if (titulo == '' || url == '' || resources.length <= 0) {
 			modal('flex', 'Os campos marcados com (*), são obrigatórios', 'cabecalho-erro');
 		} else {
 			let ajax = new XMLHttpRequest();
 			ajax.open("POST", servidor + uri, true);
 			ajax.setRequestHeader("Content-type", "application/x-www-form-urlencoded");
-			ajax.send("titulo=" + titulo.value + "&url=" + url.value + "&status=" + status.value + "&identificador=" + identificador);
+			ajax.send(
+				"titulo=" + titulo + 
+				"&url=" + url + 
+				"&status=" + status + 
+				"&identificador=" + identificador +
+				"&resources=" + resources
+			);
 			
 			ajax.onreadystatechange = function() {
 				if (ajax.status == 200) {
 					if (identificador == '0') {
-						;
-						url.value = '';
-						status.value = '1';
+						clearInput('titulo', '');
+						clearInput('url', '');
+						clearInput('status', '1');
+						clearChecked('post');
+						clearChecked('page');
+						clearChecked('media');
 					}
 					modal('flex', 'Os dados foram salvos com sucesso', 'cabecalho-sucesso');
 					backToConsultation('fechar');

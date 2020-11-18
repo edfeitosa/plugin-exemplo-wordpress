@@ -25,7 +25,8 @@ class Sites {
 						'sit_url' => $_POST['url'],
 						'sit_auth_code' => md5(date(DATE_RFC822)),
 						'sit_status' => $_POST['status'],
-						'sit_user' => get_current_user_id()
+						'sit_user' => get_current_user_id(),
+						'sit_resources' => $_POST['resources']
           ),
           array('%s', '%s', '%s', '%s', '%s')
       );
