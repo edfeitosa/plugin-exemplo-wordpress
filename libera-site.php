@@ -33,6 +33,7 @@ function sites_table($table_data) {
 	return 'CREATE TABLE IF NOT EXISTS ' . $table_data['sites'] . ' (
 		`sit_id` int(11) AUTO_INCREMENT PRIMARY KEY,
 		`sit_title` varchar(255) NOT NULL,
+		`sit_endpoint` varchar(150) NOT NULL,
 		`sit_auth_code` varchar(255) NOT NULL,
 		`sit_status` tinyint(1) NOT NULL DEFAULT 1,
 		`sit_user` varchar(100) NOT NULL,
@@ -99,7 +100,8 @@ function new_edition() { Templates\Edition::new(); }
 function consultation() { Templates\Consultation::home(); }
 
 // adiciona novo endpoint
-add_action(
+
+/* add_action(
 	'rest_api_init',
 	function () {
 		register_rest_route (
@@ -128,6 +130,6 @@ function disables_wordpress_api($endpoints) {
 	return $endpoints;
 }
 
-add_filter('rest_endpoints', 'disables_wordpress_api');
+add_filter('rest_endpoints', 'disables_wordpress_api'); */
 
 ?>

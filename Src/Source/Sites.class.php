@@ -22,12 +22,13 @@ class Sites {
           $wpdb->prefix . PREFIX_PLUGIN . 'sites',
           array(
 						'sit_title' => $_POST['titulo'],
+						'sit_endpoint' => $_POST['endpoint'],
 						'sit_auth_code' => md5(date(DATE_RFC822)),
 						'sit_status' => $_POST['status'],
 						'sit_user' => get_current_user_id(),
 						'sit_resources' => $_POST['resources']
           ),
-          array('%s', '%s', '%s', '%s', '%s')
+          array('%s', '%s', '%s', '%s', '%s', '%s')
       );
 		}
 	}

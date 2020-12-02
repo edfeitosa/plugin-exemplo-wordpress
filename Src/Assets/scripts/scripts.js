@@ -37,6 +37,7 @@ function clearChecked(identificador) {
 function salveEdition() {
 	document.getElementById("salvarEdicao").onclick = function() {
 		let titulo = document.getElementById("titulo").value;
+		let endpoint = document.getElementById("endpoint").value;
 		let status = document.getElementById("status").value;
 		let identificador = document.getElementById("identificador").value;
 		let servidor = document.getElementById("servidor").value;
@@ -49,7 +50,7 @@ function salveEdition() {
 		page.checked && resources.push(page.value);
 		media.checked && resources.push(media.value);
 
-		if (titulo == '' || resources.length <= 0) {
+		if (titulo == '' || endpoint == '' || resources.length <= 0) {
 			modal('flex', 'Os campos marcados com (*), são obrigatórios', 'cabecalho-erro');
 		} else {
 			let ajax = new XMLHttpRequest();
@@ -57,6 +58,7 @@ function salveEdition() {
 			ajax.setRequestHeader("Content-type", "application/x-www-form-urlencoded");
 			ajax.send(
 				"titulo=" + titulo +
+				"&endpoint=" + endpoint +
 				"&status=" + status + 
 				"&identificador=" + identificador +
 				"&resources=" + resources
@@ -66,6 +68,7 @@ function salveEdition() {
 				if (ajax.status == 200) {
 					if (identificador == '0') {
 						clearInput('titulo', '');
+						clearInput('endpoint', '');
 						clearInput('status', '1');
 						clearChecked('post');
 						clearChecked('page');

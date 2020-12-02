@@ -92,6 +92,7 @@ class Edition implements IEdition {
 				<h1>Adicionando novo site</h1>
 				<p>Preencha as informações do novo bloqueio</p>
 				" . self::input('Título do site (*)', 'titulo', 'titulo') . "
+				" . self::input('Endponint (*)', 'endpoint', 'endpoint') . "
 				" . self::select('Deve estar ativo?', 'status', 'status', self::getOptionsSelect()) . "
 				" . self::checkbox('O que pode ser acessado? (*)', self::getOptionsCheckbox()) . "
 				" . self::hidden('identificador', self::identificator()) . "
