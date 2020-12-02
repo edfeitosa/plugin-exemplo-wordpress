@@ -13,23 +13,31 @@ use Libs\Button;
 
 class Edition implements IEdition {
 
-	private static $optionsSelect = array(
+	/* private static $optionsSelect = array(
 		[ "value" => "1", "option" => "Sim" ],
 		[ "value" => "0", "option" => "Não" ]
-	);
-
-	private static $optionsCheckbox = array(
-		[ "value" => "post", "label" => "Posts", "id" => "post", "name" => "post" ],
-		[ "value" => "page", "label" => "Páginas", "id" => "page", "name" => "page" ],
-		[ "value" => "media", "label" => "Mídia", "id" => "media", "name" => "media" ]
-	);
+	); */
 
 	private static function getOptionsSelect() {
-		return self::$optionsSelect;
+		return array(
+			[ "value" => "1", "option" => "Sim" ],
+			[ "value" => "0", "option" => "Não" ]
+		);
 	}
 
 	private static function getOptionsCheckbox() {
-		return self::$optionsCheckbox;
+		global $wpdb;
+		$categories = $wpdb->get_results("SELECT * FROM $wpdb->terms WHERE slug <> 'sem-categoria'");
+		$optionsCheckbox = array();
+		foreach ($categories as $item) {
+			array_push($optionsCheckbox, [
+				"value" => $item->slug,
+				"id" => $item->slug,
+				"name" => $item->slug,
+				"label" => $item->name
+			]);
+		}
+		return $optionsCheckbox;
 	}
 	
 	public static function input($titulo, $name, $id, $value = '', $class = 'input-text') {
