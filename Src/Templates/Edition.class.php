@@ -13,11 +13,6 @@ use Libs\Button;
 
 class Edition implements IEdition {
 
-	/* private static $optionsSelect = array(
-		[ "value" => "1", "option" => "Sim" ],
-		[ "value" => "0", "option" => "Não" ]
-	); */
-
 	private static function getOptionsSelect() {
 		return array(
 			[ "value" => "1", "option" => "Sim" ],
