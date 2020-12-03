@@ -47,7 +47,7 @@ class Checkbox implements ICheckbox {
 		foreach(self::getOptions() as $item) {
 			$checked = (in_array($item["value"], self::getValue())) ? 'checked' : '';
 			$options_checkbox .= "<div class='" . self::getClass() . "'>
-				<input type='checkbox' name='" . $item["name"] . "' id='" . $item["id"] . "' value='" . $item["value"] . "' " . $checked . " />
+				<input type='checkbox' class='item-check' name='item-check' id='" . $item["id"] . "' value='" . $item["value"] . "' " . $checked . " />
 				<label for='" . $item["value"] . "'>" . $item["label"] . "</label>
 			</div>";
 		}

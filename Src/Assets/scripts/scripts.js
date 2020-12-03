@@ -31,7 +31,16 @@ function clearInput(identificador, value) {
 }
 
 function clearChecked(identificador) {
-	document.getElementById(identificador).checked = false;
+	document.getElementsByName(identificador).checked = false;
+}
+
+function resourcesList() {
+	let itens = [];
+	let checks = document.getElementsByName('item-check');
+	for(let i=0; i < checks.length; i++) {
+		checks[i].checked && itens.push(checks[i].value);
+	}
+	return itens;
 }
 
 function salveEdition() {
@@ -42,13 +51,7 @@ function salveEdition() {
 		let identificador = document.getElementById("identificador").value;
 		let servidor = document.getElementById("servidor").value;
 		let uri = document.getElementById("uri").value;
-		let post = document.getElementById("post");
-		let page = document.getElementById("page");
-		let media = document.getElementById("media");
-		let resources = [];
-		post.checked && resources.push(post.value);
-		page.checked && resources.push(page.value);
-		media.checked && resources.push(media.value);
+		let resources = resourcesList();
 
 		if (titulo == '' || endpoint == '' || resources.length <= 0) {
 			modal('flex', 'Os campos marcados com (*), são obrigatórios', 'cabecalho-erro');
@@ -70,9 +73,7 @@ function salveEdition() {
 						clearInput('titulo', '');
 						clearInput('endpoint', '');
 						clearInput('status', '1');
-						clearChecked('post');
-						clearChecked('page');
-						clearChecked('media');
+						clearChecked('item-check');
 					}
 					modal('flex', 'Os dados foram salvos com sucesso', 'cabecalho-sucesso');
 					backToConsultation('fechar');
