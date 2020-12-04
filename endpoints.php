@@ -1,10 +1,10 @@
 <?php
 
 /**
- * Plugin Name: Libera Site
- * Description: Verifica permissão de sites para acesso às informações
+ * Plugin Name: Endpoints
+ * Description: Gerenciamento de endpoints para acesso a informações via API
  * Version: 1.0
- * Author: Localiza Labs
+ * Author: Eduardo Feitosa | Squad Robocorp - Localiza Labs
 **/
 
 error_reporting(-1);
@@ -15,8 +15,8 @@ if (!defined('ABSPATH')) exit;
 date_default_timezone_set('America/Sao_Paulo');
 
 define('WP_PLUGIN_PATH', plugin_dir_path(__FILE__));
-define('WP_UNINSTALL_PLUGIN', WP_PLUGIN_PATH . '/libera_site/uninstall.php');
-define('PREFIX_PLUGIN', 'libera_site_');
+define('WP_UNINSTALL_PLUGIN', WP_PLUGIN_PATH . '/endpoints/uninstall.php');
+define('PREFIX_PLUGIN', 'endpoints_');
 
 require_once(WP_PLUGIN_PATH . 'Src/Autoload.php');
 
@@ -61,8 +61,8 @@ register_deactivation_hook(__FILE__, 'truncate_table_on_deactivation');
 function truncate_table_on_deactivation() {
 	global $wpdb;
 	$wpdb->query('TRUNCATE TABLE ' . table_name()['sites']);
-	delete_option('libera_site_plugin');
-	delete_site_option('libera_site_plugin');
+	delete_option('endpoints_plugin');
+	delete_site_option('endpoints_plugin');
 }
 
 // registra css e scripts
@@ -79,7 +79,7 @@ function add_custom_menu_item() {
 	global $home, $create;
 	add_menu_page(
 		'',
-		'Libera Site',
+		'Endpoints',
 		'manage_options',
 		'consultar',
 		'consultation',
