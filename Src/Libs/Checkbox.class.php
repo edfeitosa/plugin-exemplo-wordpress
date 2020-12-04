@@ -43,15 +43,27 @@ class Checkbox implements ICheckbox {
 	}
 
 	private static function optionsCheckbox() {
-		$options_checkbox = "";
-		foreach(self::getOptions() as $item) {
-			$checked = (in_array($item["value"], self::getValue())) ? 'checked' : '';
-			$options_checkbox .= "<div class='" . self::getClass() . "'>
-				<input type='checkbox' class='item-check' name='item-check' id='" . $item["id"] . "' value='" . $item["value"] . "' " . $checked . " />
-				<label for='" . $item["value"] . "'>" . $item["label"] . "</label>
+		$html = "";
+		
+		if (!self::getOptions()) {
+			
+			$html .= "<div class='alert'>
+				Não existem categorias cadastradas. Para continuar, é necessário selecionar pelo menos uma categoria.
 			</div>";
+			
+		} else {
+			
+			foreach (self::getOptions() as $item) {
+				$checked = (in_array($item["value"], self::getValue())) ? 'checked' : '';
+				$html .= "<div class='" . self::getClass() . "'>
+					<input type='checkbox' class='item-check' name='item-check' id='" . $item["id"] . "' value='" . $item["value"] . "' " . $checked . " />
+					<label for='" . $item["value"] . "'>" . $item["label"] . "</label>
+				</div>";
+			}
+			
 		}
-		return $options_checkbox;
+		
+		return $html;
 	}
   
   public static function checkbox() {
