@@ -24,21 +24,21 @@ require_once(WP_PLUGIN_PATH . 'Src/Autoload.php');
 function table_name() {
 	global $wpdb;
 	return array(
-		'sites' => $wpdb->prefix . PREFIX_PLUGIN . 'sites',
+		'endpoints' => $wpdb->prefix . PREFIX_PLUGIN . 'uri',
 		'charset' => $wpdb->get_charset_collate()
 	);
 }
 
-function sites_table($table_data) {
-	return 'CREATE TABLE IF NOT EXISTS ' . $table_data['sites'] . ' (
-		`sit_id` int(11) AUTO_INCREMENT PRIMARY KEY,
-		`sit_title` varchar(255) NOT NULL,
-		`sit_endpoint` varchar(150) NOT NULL,
-		`sit_auth_code` varchar(255) NOT NULL,
-		`sit_status` tinyint(1) NOT NULL DEFAULT 1,
-		`sit_user` varchar(100) NOT NULL,
-		`sit_resources` varchar(255) NOT NULL,
-		`sit_date` timestamp NOT NULL DEFAULT CURRENT_TIMESTAMP
+function endpoints_table($table_data) {
+	return 'CREATE TABLE IF NOT EXISTS ' . $table_data['endpoints'] . ' (
+		`uri_id` int(11) AUTO_INCREMENT PRIMARY KEY,
+		`uri_title` varchar(255) NOT NULL,
+		`uri_endpoint` varchar(150) NOT NULL,
+		`uri_auth_code` varchar(255) NOT NULL,
+		`uri_status` tinyint(1) NOT NULL DEFAULT 1,
+		`uri_user` varchar(100) NOT NULL,
+		`uri_resources` varchar(255) NOT NULL,
+		`uri_date` timestamp NOT NULL DEFAULT CURRENT_TIMESTAMP
 	) ' . $table_data['charset'] . ';';
 }
 
@@ -52,7 +52,7 @@ function db_update($table_to_create) {
 
 function create_table_on_activation() {
 	$table = table_name();
-	db_update(sites_table($table));
+	db_update(endpoints_table($table));
 }
 
 // limpa dados da tabela na desativação

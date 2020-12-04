@@ -31,14 +31,14 @@ class Sites {
 		global $wpdb;
 		if (isset($_POST['titulo'])) {
 			$wpdb->insert(
-          $wpdb->prefix . PREFIX_PLUGIN . 'sites',
+          $wpdb->prefix . PREFIX_PLUGIN . 'uri',
           array(
-						'sit_title' => $_POST['titulo'],
-						'sit_endpoint' => self::sanitizeString($_POST['endpoint']),
-						'sit_auth_code' => md5(date(DATE_RFC822)),
-						'sit_status' => $_POST['status'],
-						'sit_user' => get_current_user_id(),
-						'sit_resources' => $_POST['resources']
+						'uri_title' => $_POST['titulo'],
+						'uri_endpoint' => self::sanitizeString($_POST['endpoint']),
+						'uri_auth_code' => md5(date(DATE_RFC822)),
+						'uri_status' => $_POST['status'],
+						'uri_user' => get_current_user_id(),
+						'uri_resources' => $_POST['resources']
           ),
           array('%s', '%s', '%s', '%s', '%s', '%s')
       );

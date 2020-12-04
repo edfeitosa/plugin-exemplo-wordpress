@@ -9,7 +9,7 @@ class Consultation {
 		$html = "
 			<div class='content-plugin'>" .
 				Header::header() .
-				"<h1>Libera Site</h1>" .
+				"<h1>Endpoints</h1>" .
 			"</div>
 		";
 		echo $html;

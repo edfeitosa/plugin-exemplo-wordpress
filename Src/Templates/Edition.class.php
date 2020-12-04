@@ -92,10 +92,10 @@ class Edition implements IEdition {
 		$html = Modal::modal() .
 			"<div class='content-plugin'>
 				" . Header::header() . "
-				<h1>Adicionando novo site</h1>
-				<p>Preencha as informações do novo bloqueio</p>
-				" . self::input('Título do site (*)', 'titulo', 'titulo') . "
-				" . self::input('Endponint (*)', 'endpoint', 'endpoint') . "
+				<h1>Adicionando endpoint</h1>
+				<p>Todos os campos marcados com <b>(*)</b> são de preenchimento obrigatório</p>
+				" . self::input('Título do endpoint (*)', 'titulo', 'titulo') . "
+				" . self::input('URI do endponint (*)', 'endpoint', 'endpoint') . "
 				" . self::select('Deve estar ativo?', 'status', 'status', self::getOptionsSelect()) . "
 				" . self::checkbox('O que pode ser acessado? (*)', self::getOptionsCheckbox()) . "
 				" . self::hidden('identificador', self::identificator()) . "
