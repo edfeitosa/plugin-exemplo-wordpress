@@ -3,6 +3,7 @@ namespace Templates;
 
 use Shared\Header;
 use Source\Sites;
+use Source\Terms;
 use Interfaces\IEdition;
 use Libs\Modal;
 use Libs\Input;
@@ -18,21 +19,6 @@ class Edition implements IEdition {
 			[ "value" => "1", "option" => "Sim" ],
 			[ "value" => "0", "option" => "Não" ]
 		);
-	}
-
-	private static function getOptionsCheckbox() {
-		global $wpdb;
-		$categories = $wpdb->get_results("SELECT * FROM $wpdb->terms WHERE slug <> 'sem-categoria'");
-		$optionsCheckbox = array();
-		foreach ($categories as $item) {
-			array_push($optionsCheckbox, [
-				"value" => $item->slug,
-				"id" => $item->slug,
-				"name" => $item->slug,
-				"label" => $item->name
-			]);
-		}
-		return $optionsCheckbox;
 	}
 	
 	public static function input($titulo, $name, $id, $value = '', $class = 'input-text') {
@@ -97,7 +83,7 @@ class Edition implements IEdition {
 				" . self::input('Título do endpoint (*)', 'titulo', 'titulo') . "
 				" . self::input('URI do endponint (*)', 'endpoint', 'endpoint') . "
 				" . self::select('Deve estar ativo?', 'status', 'status', self::getOptionsSelect()) . "
-				" . self::checkbox('O que pode ser acessado? (*)', self::getOptionsCheckbox()) . "
+				" . self::checkbox('O que pode ser acessado? (*)', Terms::getTerms()) . "
 				" . self::hidden('identificador', self::identificator()) . "
 				" . self::hidden('servidor', self::servidor()) . "
 				" . self::hidden('uri', self::uri()) . "
