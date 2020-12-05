@@ -63,18 +63,6 @@ class Edition implements IEdition {
 		return Button::button();
 	}
 	
-	/* private static function servidor() {
-		return 'http://' . strval($_SERVER['HTTP_HOST']);
-	}
-	
-	private static function uri() {
-		return strval($_SERVER['REQUEST_URI']);
-	}
-	
-	private static function identificator() {
-		return (empty($_GET['id'])) ? '0' : $_GET['id'];
-	} */
-	
 	private static function html() {
 		$html = Modal::modal() .
 			"<div class='content-plugin'>
