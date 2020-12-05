@@ -42,17 +42,19 @@
 }
 .content-plugin .itens-checkbox {
   display: flex;
-  justify-content: space-between;
-  width: 50%;
+  flex-direction: column;
+  width: 380px;
+  background-color: #fff;
+  border: 1px solid #ccc;
+  border-radius: 4px;
+  padding: 2px 10px 10px 10px;
 }
 .content-plugin .itens-checkbox > .input-checkbox {
-  border: 1px solid #ccc;
-  background-color: #fff;
-  padding: 15px 10px 10px 10px;
-  border-radius: 4px;
-  width: 20%;
+  padding: 15px 0px 10px 0px;
+  width: 100%;
   display: flex;
   align-items: center;
+  border-bottom: 1px solid #ccc;
 }
 .content-plugin .itens-checkbox > .input-checkbox > label {
   margin-top: -5px;
