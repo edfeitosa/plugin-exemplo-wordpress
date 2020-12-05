@@ -2,6 +2,7 @@
 namespace Templates;
 
 use Shared\Header;
+use Shared\Route;
 use Source\Sites;
 use Source\Terms;
 use Interfaces\IEdition;
@@ -62,7 +63,7 @@ class Edition implements IEdition {
 		return Button::button();
 	}
 	
-	private static function servidor() {
+	/* private static function servidor() {
 		return 'http://' . strval($_SERVER['HTTP_HOST']);
 	}
 	
@@ -72,7 +73,7 @@ class Edition implements IEdition {
 	
 	private static function identificator() {
 		return (empty($_GET['id'])) ? '0' : $_GET['id'];
-	}
+	} */
 	
 	private static function html() {
 		$html = Modal::modal() .
@@ -84,9 +85,9 @@ class Edition implements IEdition {
 				" . self::input('URI do endponint (*)', 'endpoint', 'endpoint') . "
 				" . self::select('Deve estar ativo?', 'status', 'status', self::getOptionsSelect()) . "
 				" . self::checkbox('O que pode ser acessado? (*)', Terms::getTerms()) . "
-				" . self::hidden('identificador', self::identificator()) . "
-				" . self::hidden('servidor', self::servidor()) . "
-				" . self::hidden('uri', self::uri()) . "
+				" . self::hidden('identificador', Route::identificator()) . "
+				" . self::hidden('servidor', Route::servidor()) . "
+				" . self::hidden('uri', Route::uri()) . "
 				" . self::button('Salvar', 'salvarEdicao', 'salvarEdicao') . "
 				" . self::button('Cancelar', 'cancelarEdicao', 'cancelarEdicao', 'cancel-button') . "
 			</div>
