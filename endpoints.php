@@ -99,37 +99,4 @@ function new_edition() { Templates\Edition::new(); }
 
 function consultation() { Templates\Consultation::home(); }
 
-// adiciona novo endpoint
-
-/* add_action(
-	'rest_api_init',
-	function () {
-		register_rest_route (
-			'liberasite/v1',
-			'/autorizacao',
-			array(
-				'methods' => 'GET',
-				'callback' => 'auth'
-			)
-		);
-	}
-);
-
-function auth() { Source\Sites::auth(); }
-
-function disables_wordpress_api($endpoints) {
-	$apis = array('posts', 'pages', 'comments', 'users', 'media');
-	for($i = 0; $i < count($apis); $i++) {
-		if (isset($endpoints['/wp/v2/' . $apis[$i]])) {
-			unset($endpoints['/wp/v2/' . $apis[$i]]);
-		}
-		if (isset( $endpoints['/wp/v2/' .  $apis[$i] . '/(?P<id>[\d]+)'] ) ) {
-			unset($endpoints['/wp/v2/' .  $apis[$i] . '/(?P<id>[\d]+)'] );
-		}
-	}
-	return $endpoints;
-}
-
-add_filter('rest_endpoints', 'disables_wordpress_api'); */
-
 ?>

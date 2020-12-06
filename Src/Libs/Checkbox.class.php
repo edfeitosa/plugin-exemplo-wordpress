@@ -14,38 +14,38 @@ class Checkbox implements ICheckbox {
 		return self::$titulo;
 	}
 	
-	public static function setTitulo($vtitulo) {
+	public static function set_titulo($vtitulo) {
 		self::$titulo = $vtitulo;
 	}
 	
-	public static function getValue() {
+	public static function get_value() {
 		return self::$value;
 	}
 	
-	public static function setValue($vvalue) {
+	public static function set_value($vvalue) {
 		self::$value = $vvalue;
 	}
 	
-	public static function getClass() {
+	public static function get_class() {
 		return self::$class;
 	}
 	
-	public static function setClass($vclass) {
+	public static function set_class($vclass) {
 		self::$class = $vclass;
   }
 
-  public static function getOptions() {
+  public static function get_options() {
 		return self::$options;
 	}
 	
-	public static function setOptions($voptions) {
+	public static function set_options($voptions) {
 		self::$options = $voptions;
 	}
 
 	private static function optionsCheckbox() {
 		$html = "";
 		
-		if (!self::getOptions()) {
+		if (!self::get_options()) {
 			
 			$html .= "<div class='alert'>
 				Não existem categorias cadastradas. Para continuar, é necessário selecionar pelo menos uma categoria.
@@ -53,9 +53,9 @@ class Checkbox implements ICheckbox {
 			
 		} else {
 			
-			foreach (self::getOptions() as $item) {
-				$checked = (in_array($item["value"], self::getValue())) ? 'checked' : '';
-				$html .= "<div class='" . self::getClass() . "'>
+			foreach (self::get_options() as $item) {
+				$checked = (in_array($item["value"], self::get_value())) ? 'checked' : '';
+				$html .= "<div class='" . self::get_class() . "'>
 					<input type='checkbox' class='item-check' name='item-check' id='" . $item["id"] . "' value='" . $item["value"] . "' " . $checked . " />
 					<label for='" . $item["value"] . "'>" . $item["label"] . "</label>
 				</div>";

@@ -15,39 +15,39 @@ class Input implements IInput {
 		return self::$titulo;
 	}
 	
-	public static function setTitulo($vtitulo) {
+	public static function set_titulo($vtitulo) {
 		self::$titulo = $vtitulo;
 	}
 	
-	public static function getName() {
+	public static function get_name() {
 		return self::$name;
 	}
 	
-	public static function setName($vname) {
+	public static function set_name($vname) {
 		self::$name = $vname;
 	}
 	
-	public static function getId() {
+	public static function get_id() {
 		return self::$id;
 	}
 	
-	public static function setId($vid) {
+	public static function set_id($vid) {
 		self::$id = $vid;
 	}
 	
-	public static function getValue() {
+	public static function get_value() {
 		return self::$value;
 	}
 	
-	public static function setValue($vvalue) {
+	public static function set_value($vvalue) {
 		self::$value = $vvalue;
 	}
 	
-	public static function getClass() {
+	public static function get_class() {
 		return self::$class;
 	}
 	
-	public static function setClass($vclass) {
+	public static function set_class($vclass) {
 		self::$class = $vclass;
 	}
 	
@@ -57,7 +57,7 @@ class Input implements IInput {
 				<div class='titulo-input'>
 					" . self::getTitulo() . "
 				</div>
-				<input type='text' name='" . self::getName() . "' id='" . self::getId() . "' value='" . self::getValue() . "'	class='" . self::getClass() . "' />
+				<input type='text' name='" . self::get_name() . "' id='" . self::get_id() . "' value='" . self::get_value() . "'	class='" . self::get_class() . "' />
 			</p>
 		";
 		return $html;

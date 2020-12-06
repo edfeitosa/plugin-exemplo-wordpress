@@ -15,7 +15,7 @@ use Libs\Button;
 
 class Edition implements IEdition {
 
-	private static function getOptionsSelect() {
+	private static function get_options_select() {
 		return array(
 			[ "value" => "1", "option" => "Sim" ],
 			[ "value" => "0", "option" => "Não" ]
@@ -23,43 +23,43 @@ class Edition implements IEdition {
 	}
 	
 	public static function input($titulo, $name, $id, $value = '', $class = 'input-text') {
-		Input::setTitulo($titulo);
-		Input::setName($name);
-		Input::setId($id);
-		Input::setValue($value);
-		Input::setClass($class);
+		Input::set_titulo($titulo);
+		Input::set_name($name);
+		Input::set_id($id);
+		Input::set_value($value);
+		Input::set_class($class);
 		return Input::input();
 	}
 	
 	private static function select($titulo, $name, $id, $options, $value = '', $class = 'input-text') {
-		Select::setTitulo($titulo);
-		Select::setName($name);
-		Select::setId($id);
-		Select::setOptions($options);
-		Select::setValue($value);
-		Select::setClass($class);
+		Select::set_titulo($titulo);
+		Select::set_name($name);
+		Select::set_id($id);
+		Select::set_options($options);
+		Select::set_value($value);
+		Select::set_class($class);
 		return Select::select();
 	}
 
 	private static function checkbox($titulo, $options, $value = array(), $class = 'input-checkbox') {
-		Checkbox::setTitulo($titulo);
-		Checkbox::setOptions($options);
-		Checkbox::setValue($value);
-		Checkbox::setClass($class);
+		Checkbox::set_titulo($titulo);
+		Checkbox::set_options($options);
+		Checkbox::set_value($value);
+		Checkbox::set_class($class);
 		return Checkbox::checkbox();
 	}
 	
 	private static function hidden($id, $value) {
-		Hidden::setId($id);
-		Hidden::setValue($value);
+		Hidden::set_id($id);
+		Hidden::set_value($value);
 		return Hidden::hidden();
 	}
 	
 	private static function button($titulo, $name, $id, $class = 'input-button') {
-		Button::setTitulo($titulo);
-		Button::setName($name);
-		Button::setId($id);
-		Button::setClass($class);
+		Button::set_titulo($titulo);
+		Button::set_name($name);
+		Button::set_id($id);
+		Button::set_class($class);
 		return Button::button();
 	}
 	
@@ -71,7 +71,7 @@ class Edition implements IEdition {
 				<p>Todos os campos marcados com <b>(*)</b> são de preenchimento obrigatório</p>
 				" . self::input('Título do endpoint (*)', 'titulo', 'titulo') . "
 				" . self::input('URI do endponint (*)', 'endpoint', 'endpoint') . "
-				" . self::select('Deve estar ativo?', 'status', 'status', self::getOptionsSelect()) . "
+				" . self::select('Deve estar ativo?', 'status', 'status', self::get_options_select()) . "
 				" . self::checkbox('O que pode ser acessado? (*)', Terms::getTerms()) . "
 				<p style='margin-top: -7px;'>
 					A categoria não está na lista? 

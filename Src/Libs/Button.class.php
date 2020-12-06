@@ -10,19 +10,19 @@ class Button implements IButton {
 	private static $titulo;
   private static $class;
   
-  public static function getName() {
+  public static function get_name() {
 		return self::$name;
 	}
 	
-	public static function setName($vname) {
+	public static function set_name($vname) {
 		self::$name = $vname;
 	}
 	
-	public static function getId() {
+	public static function get_id() {
 		return self::$id;
 	}
 	
-	public static function setId($vid) {
+	public static function set_id($vid) {
 		self::$id = $vid;
 	}
 	
@@ -30,21 +30,21 @@ class Button implements IButton {
 		return self::$titulo;
 	}
 	
-	public static function setTitulo($vtitulo) {
+	public static function set_titulo($vtitulo) {
 		self::$titulo = $vtitulo;
 	}
 	
-	public static function getClass() {
+	public static function get_class() {
 		return self::$class;
 	}
 	
-	public static function setClass($vclass) {
+	public static function set_class($vclass) {
 		self::$class = $vclass;
 	}
 	
 	public static function button() {
 		$html = "
-			<button name='" . self::getName() . "' id='" . self::getId() . "' class='" . self::getClass() . "'>" . self::getTitulo() . "</button>
+			<button name='" . self::get_name() . "' id='" . self::get_id() . "' class='" . self::get_class() . "'>" . self::getTitulo() . "</button>
 		";
 		return $html;
 	}
