@@ -34,6 +34,12 @@ $cinza-escuro: #333;
 	
 	p {
 		margin-bottom: 10px;
+		a {
+			color: #0073aa;
+			font-weight: 700;
+			text-decoration: none;
+			cursor: pointer;
+		}
 	}
 	
 	.titulo-input {

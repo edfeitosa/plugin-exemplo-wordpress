@@ -15,6 +15,12 @@
 .content-plugin p {
   margin-bottom: 10px;
 }
+.content-plugin p a {
+  color: #0073aa;
+  font-weight: 700;
+  text-decoration: none;
+  cursor: pointer;
+}
 .content-plugin .titulo-input {
   font-size: 0.85rem;
   font-weight: 700;

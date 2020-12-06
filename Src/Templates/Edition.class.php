@@ -73,6 +73,11 @@ class Edition implements IEdition {
 				" . self::input('URI do endponint (*)', 'endpoint', 'endpoint') . "
 				" . self::select('Deve estar ativo?', 'status', 'status', self::getOptionsSelect()) . "
 				" . self::checkbox('O que pode ser acessado? (*)', Terms::getTerms()) . "
+				<p style='margin-top: -7px;'>
+					A categoria não está na lista? 
+					<a href='edit-tags.php?taxonomy=category'>Clique aqui</a> 
+					para adicionar
+				</p>
 				" . self::hidden('identificador', Route::identificator()) . "
 				" . self::hidden('servidor', Route::servidor()) . "
 				" . self::hidden('uri', Route::uri()) . "
