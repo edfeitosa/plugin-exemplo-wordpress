@@ -60,7 +60,7 @@ register_deactivation_hook(__FILE__, 'truncate_table_on_deactivation');
 
 function truncate_table_on_deactivation() {
 	global $wpdb;
-	$wpdb->query('TRUNCATE TABLE ' . table_name()['sites']);
+	$wpdb->query('TRUNCATE TABLE ' . table_name()['endpoints']);
 	delete_option('endpoints_plugin');
 	delete_site_option('endpoints_plugin');
 }
@@ -98,5 +98,22 @@ function add_custom_menu_item() {
 function new_edition() { Templates\Edition::new(); }
 
 function consultation() { Templates\Consultation::home(); }
+
+function get_endpoint() { Source\Sites::get_endpoint(); }
+
+add_action(
+	'rest_api_init',
+	function () {
+		register_rest_route (
+			'localiza/v1',
+			'/api/(?P<endpoint>[a-zA-Z0-9 .\-]+)',
+			array(
+				'methods' => 'GET',
+				'callback' => 'get_endpoint',
+				'args' => array('endpoint')
+			)
+		);
+	}
+);
 
 ?>
