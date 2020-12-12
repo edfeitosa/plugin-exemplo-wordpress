@@ -116,4 +116,10 @@ add_action(
 	}
 );
 
+function remove_upgrade_nag() {
+	echo '<style type="text/css"> .update-nag {display: none} </style>';
+}
+
+add_action('admin_head', 'remove_upgrade_nag');
+
 ?>
