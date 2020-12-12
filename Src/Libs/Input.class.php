@@ -11,7 +11,7 @@ class Input implements IInput {
 	private static $value;
 	private static $class;
 	
-	public static function getTitulo() {
+	public static function get_titulo() {
 		return self::$titulo;
 	}
 	
@@ -55,7 +55,7 @@ class Input implements IInput {
 		$html = "
 			<p>
 				<div class='titulo-input'>
-					" . self::getTitulo() . "
+					" . self::get_titulo() . "
 				</div>
 				<input type='text' name='" . self::get_name() . "' id='" . self::get_id() . "' value='" . self::get_value() . "'	class='" . self::get_class() . "' />
 			</p>

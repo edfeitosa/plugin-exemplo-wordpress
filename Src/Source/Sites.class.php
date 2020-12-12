@@ -2,6 +2,7 @@
 namespace Source;
 
 use Shared\Route;
+use Shared\Response;
 
 class Sites {
 
@@ -27,9 +28,12 @@ class Sites {
 		// http://localhost/estudo-plugins-wordpress/wp-json/localiza/v1/autorizacao?id=9
 		// $id = $_REQUEST['id'];
 
-		echo self::verify_endpoint();
+		/* echo self::verify_endpoint();
 		if (isset($_GET['categoria'])) { echo $_GET['categoria']; }
-		if (isset($_GET['id'])) { echo $_GET['id']; }
+		if (isset($_GET['id'])) { echo $_GET['id']; } */
+
+		Response::set_code(200);
+		Response::response();
 
 		/* http_response_code(200);
 		echo json_encode(array(
