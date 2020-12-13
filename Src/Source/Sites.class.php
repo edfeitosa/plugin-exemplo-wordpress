@@ -3,8 +3,9 @@ namespace Source;
 
 use Shared\Route;
 use Shared\Response;
+use Interfaces\ISites;
 
-class Sites {
+class Sites implements ISites {
 
 	private static function sanitize_string($str) {
     $str = preg_replace('/[áàãâä]/ui', 'a', $str);
@@ -20,8 +21,37 @@ class Sites {
 	
 	private static function verify_endpoint() {
 		$uri = explode('/', Route::uri());
-		$endpoint = explode('?', $uri[6]);
+		$endpoint = explode('?', end($uri));
 		return $endpoint[0];
+	}
+
+	private static function verify_authorization($headers) {
+		if (!isset($headers['Authorization'])) {
+			Response::set_code(400);
+			Response::response(array('erro' => 'é necessário informar um token para acesso'));
+			exit();
+		}
+	}
+
+	private static function data_authorization($headers) {
+		global $wpdb;
+		$auth = $headers['Authorization'];
+		$bearer = explode(' ', $auth);
+		$code = end($bearer);
+		$data = $wpdb->get_results("select uri_endpoint, uri_resources from " . $wpdb->prefix ."endpoints_uri where uri_auth_code = '$code'");
+
+		if (count($data) == 0) {
+			Response::set_code(401);
+			Response::response(array('erro' => 'token informado não é válido'));
+			exit();
+		}
+
+		foreach($data as $item) {
+			return array(
+				'endpoint' => $item->uri_endpoint,
+				'categorias' => $item->uri_resources
+			);
+		}
 	}
 
 	public static function get_endpoint() {
@@ -32,8 +62,9 @@ class Sites {
 		if (isset($_GET['categoria'])) { echo $_GET['categoria']; }
 		if (isset($_GET['id'])) { echo $_GET['id']; } */
 
-		Response::set_code(200);
-		Response::response();
+		$headers = apache_request_headers();
+		self::verify_authorization($headers);
+		print_r(self::data_authorization($headers));
 
 		/* http_response_code(200);
 		echo json_encode(array(
