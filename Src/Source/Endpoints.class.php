@@ -3,9 +3,9 @@ namespace Source;
 
 use Shared\Route;
 use Shared\Response;
-use Interfaces\ISites;
+use Interfaces\IEndpoints;
 
-class Sites implements ISites {
+class Endpoints implements IEndpoints {
 
 	private static function sanitize_string($str) {
     $str = preg_replace('/[áàãâä]/ui', 'a', $str);
@@ -64,7 +64,7 @@ class Sites implements ISites {
 
 		$headers = apache_request_headers();
 		self::verify_authorization($headers);
-		print_r(self::data_authorization($headers));
+		//print_r(self::data_authorization($headers));
 
 		/* http_response_code(200);
 		echo json_encode(array(
@@ -85,12 +85,11 @@ class Sites implements ISites {
           array(
 						'uri_title' => $_POST['titulo'],
 						'uri_endpoint' => $clean_uri,
-						'uri_auth_code' => md5(date(DATE_RFC822) . $clean_uri),
 						'uri_status' => $_POST['status'],
 						'uri_user' => get_current_user_id(),
 						'uri_resources' => $_POST['resources']
           ),
-          array('%s', '%s', '%s', '%s', '%s', '%s')
+          array('%s', '%s', '%s', '%s', '%s')
 			);
 		}
 	}

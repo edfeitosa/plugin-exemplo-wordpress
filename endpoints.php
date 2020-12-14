@@ -34,7 +34,6 @@ function endpoints_table($table_data) {
 		`uri_id` int(11) AUTO_INCREMENT PRIMARY KEY,
 		`uri_title` varchar(255) NOT NULL,
 		`uri_endpoint` varchar(150) NOT NULL,
-		`uri_auth_code` varchar(255) NOT NULL,
 		`uri_status` tinyint(1) NOT NULL DEFAULT 1,
 		`uri_user` varchar(100) NOT NULL,
 		`uri_resources` varchar(255) NOT NULL,
@@ -99,7 +98,7 @@ function new_edition() { Templates\Edition::new(); }
 
 function consultation() { Templates\Consultation::home(); }
 
-function get_endpoint() { Source\Sites::get_endpoint(); }
+function get_endpoint() { Source\Endpoints::get_endpoint(); }
 
 add_action(
 	'rest_api_init',

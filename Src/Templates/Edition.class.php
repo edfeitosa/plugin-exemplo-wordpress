@@ -3,7 +3,7 @@ namespace Templates;
 
 use Shared\Header;
 use Shared\Route;
-use Source\Sites;
+use Source\Endpoints;
 use Source\Terms;
 use Interfaces\IEdition;
 use Libs\Modal;
@@ -89,7 +89,7 @@ class Edition implements IEdition {
 	}
 	
 	public static function new() {
-		Sites::insert();
+		Endpoints::insert();
 		echo self::html();
 	}
 	

@@ -1,7 +1,7 @@
 <?php
 namespace Interfaces;
 
-interface ISites {
+interface IEndpoints {
 
   public static function get_endpoint();
   public static function insert();
