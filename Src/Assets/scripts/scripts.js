@@ -43,7 +43,7 @@ function resourcesList() {
 	return itens;
 }
 
-function salveEdition() {
+function saveEdition() {
 	document.getElementById("salvarEdicao").onclick = function() {
 		let titulo = document.getElementById("titulo").value;
 		let endpoint = document.getElementById("endpoint").value;
@@ -97,6 +97,6 @@ function backToConsultation(identificador) {
 
 window.onload = function() {
 	modal();
-	salveEdition();
+	saveEdition();
 	backToConsultation('cancelarEdicao');
 }

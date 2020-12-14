@@ -25,6 +25,7 @@ function table_name() {
 	global $wpdb;
 	return array(
 		'endpoints' => $wpdb->prefix . PREFIX_PLUGIN . 'uri',
+		'tokens' => $wpdb->prefix . PREFIX_PLUGIN . 'tokens',
 		'charset' => $wpdb->get_charset_collate()
 	);
 }
@@ -41,6 +42,16 @@ function endpoints_table($table_data) {
 	) ' . $table_data['charset'] . ';';
 }
 
+function tokens_table($table_data) {
+	return 'CREATE TABLE IF NOT EXISTS ' . $table_data['tokens'] . ' (
+		`tok_id` int(11) AUTO_INCREMENT PRIMARY KEY,
+		`tok_title` varchar(255) NOT NULL,
+		`tok_status` tinyint(1) NOT NULL DEFAULT 1,
+		`tok_user` varchar(100) NOT NULL,
+		`tok_date` timestamp NOT NULL DEFAULT CURRENT_TIMESTAMP
+	) ' . $table_data['charset'] . ';';
+}
+
 // cria tabela na ativação do plugin
 register_activation_hook(__FILE__, 'create_table_on_activation');
 
@@ -52,6 +63,7 @@ function db_update($table_to_create) {
 function create_table_on_activation() {
 	$table = table_name();
 	db_update(endpoints_table($table));
+	db_update(tokens_table($table));
 }
 
 // limpa dados da tabela na desativação
@@ -60,6 +72,7 @@ register_deactivation_hook(__FILE__, 'truncate_table_on_deactivation');
 function truncate_table_on_deactivation() {
 	global $wpdb;
 	$wpdb->query('TRUNCATE TABLE ' . table_name()['endpoints']);
+	$wpdb->query('TRUNCATE TABLE ' . table_name()['tokens']);
 	delete_option('endpoints_plugin');
 	delete_site_option('endpoints_plugin');
 }
