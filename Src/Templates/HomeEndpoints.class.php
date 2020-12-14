@@ -3,7 +3,7 @@ namespace Templates;
 
 use Shared\Header;
 
-class Consultation {
+class HomeEndpoints {
 	
 	public static function home() {
 		$html = "

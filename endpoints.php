@@ -20,7 +20,6 @@ define('PREFIX_PLUGIN', 'endpoints_');
 
 require_once(WP_PLUGIN_PATH . 'Src/Autoload.php');
 
-// dados da tabela
 function table_name() {
 	global $wpdb;
 	return array(
@@ -52,7 +51,6 @@ function tokens_table($table_data) {
 	) ' . $table_data['charset'] . ';';
 }
 
-// cria tabela na ativação do plugin
 register_activation_hook(__FILE__, 'create_table_on_activation');
 
 function db_update($table_to_create) {
@@ -66,7 +64,6 @@ function create_table_on_activation() {
 	db_update(tokens_table($table));
 }
 
-// limpa dados da tabela na desativação
 register_deactivation_hook(__FILE__, 'truncate_table_on_deactivation');
 
 function truncate_table_on_deactivation() {
@@ -77,41 +74,26 @@ function truncate_table_on_deactivation() {
 	delete_site_option('endpoints_plugin');
 }
 
-// registra css e scripts
 function styles_admin() {
 	Shared\Styles::styles_admin();
 	Shared\Scripts::scripts_admin();
 }
 add_action('admin_enqueue_scripts', 'styles_admin');
 
-// registra item no menu laterial
 add_action('admin_menu', 'add_custom_menu_item');
 
 function add_custom_menu_item() {
 	global $home, $create;
-	add_menu_page(
-		'',
-		'Endpoints',
-		'manage_options',
-		'consultar',
-		'consultation',
-		'dashicons-privacy'
-	);
-	add_submenu_page(
-		'consultar',
-		'',
-		'Novo',
-		'manage_options',
-		'editar',
-		'new_edition'
-	);
+	add_menu_page('', 'Endpoints', 'manage_options', 'homeEndpoints', 'home_endpoints', 'dashicons-privacy');
+	add_submenu_page('homeEndpoints', '', 'Novo Endpoint', 'manage_options', 'edition_endpoints', 'edition_endpoints');
+	add_submenu_page('homeEndpoints', '', 'Tokens', 'manage_options', 'home_tokens', 'home_tokens');
+	add_submenu_page('homeEndpoints', '', 'Novo Token', 'manage_options', 'edition_tokens', 'edition_tokens');
 }
 
-function new_edition() { Templates\Edition::new(); }
-
-function consultation() { Templates\Consultation::home(); }
-
-function get_endpoint() { Source\Endpoints::get_endpoint(); }
+function home_endpoints() { Templates\HomeEndpoints::home(); }
+function edition_endpoints() { Templates\EditionEndpoints::new(); }
+function home_tokens() { Templates\HomeTokens::home(); }
+function edition_tokens() { Templates\EditionTokens::new(); }
 
 add_action(
 	'rest_api_init',
@@ -123,10 +105,12 @@ add_action(
 				'methods' => 'GET',
 				'callback' => 'get_endpoint',
 				'args' => array('endpoint')
-			)
-		);
-	}
-);
+				)
+			);
+		}
+	);
+	
+function get_endpoint() { Source\Endpoints::get_endpoint(); }
 
 function remove_upgrade_nag() {
 	echo '<style type="text/css"> .update-nag {display: none} </style>';

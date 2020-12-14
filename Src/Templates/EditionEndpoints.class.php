@@ -5,7 +5,7 @@ use Shared\Header;
 use Shared\Route;
 use Source\Endpoints;
 use Source\Terms;
-use Interfaces\IEdition;
+use Interfaces\IEditionEndpoints;
 use Libs\Modal;
 use Libs\Input;
 use Libs\Select;
@@ -13,7 +13,7 @@ use Libs\Checkbox;
 use Libs\Hidden;
 use Libs\Button;
 
-class Edition implements IEdition {
+class EditionEndpoints implements IEditionEndpoints {
 
 	private static function get_options_select() {
 		return array(
@@ -22,7 +22,7 @@ class Edition implements IEdition {
 		);
 	}
 	
-	public static function input($titulo, $name, $id, $value = '', $class = 'input-text') {
+	private static function input($titulo, $name, $id, $value = '', $class = 'input-text') {
 		Input::set_titulo($titulo);
 		Input::set_name($name);
 		Input::set_id($id);
@@ -81,8 +81,8 @@ class Edition implements IEdition {
 				" . self::hidden('identificador', Route::identificator()) . "
 				" . self::hidden('servidor', Route::servidor()) . "
 				" . self::hidden('uri', Route::uri()) . "
-				" . self::button('Salvar', 'salvarEdicao', 'salvarEdicao') . "
-				" . self::button('Cancelar', 'cancelarEdicao', 'cancelarEdicao', 'cancel-button') . "
+				" . self::button('Salvar', 'salvarEndpoint', 'salvarEndpoint') . "
+				" . self::button('Cancelar', 'cancelarEndpoint', 'cancelarEndpoint', 'cancel-button') . "
 			</div>
 		";
 		return $html;

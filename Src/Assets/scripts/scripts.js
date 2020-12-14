@@ -44,7 +44,7 @@ function resourcesList() {
 }
 
 function saveEdition() {
-	document.getElementById("salvarEdicao").onclick = function() {
+	document.getElementById("salvarEndpoint").onclick = function() {
 		let titulo = document.getElementById("titulo").value;
 		let endpoint = document.getElementById("endpoint").value;
 		let status = document.getElementById("status").value;
@@ -76,7 +76,7 @@ function saveEdition() {
 						clearChecked('item-check');
 					}
 					modal('flex', 'Os dados foram salvos com sucesso', 'cabecalho-sucesso');
-					backToConsultation('fechar');
+					backToHome('fechar');
 				} else {
 					modal('flex', 'Ocorreu um erro e não possível salvar', 'cabecalho-erro');
 				}
@@ -85,7 +85,7 @@ function saveEdition() {
 	}
 }
 
-function backToConsultation(identificador) {
+function backToHome(identificador) {
 	document.getElementById(identificador).onclick = function() {
 		let servidor = document.getElementById("servidor").value;
 		let uri = document.getElementById("uri").value;
@@ -98,5 +98,5 @@ function backToConsultation(identificador) {
 window.onload = function() {
 	modal();
 	saveEdition();
-	backToConsultation('cancelarEdicao');
+	backToHome('cancelarEndpoint');
 }
