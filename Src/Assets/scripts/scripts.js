@@ -43,7 +43,7 @@ function resourcesList() {
 	return itens;
 }
 
-function saveEdition() {
+function saveEndpoint() {
 	document.getElementById("salvarEndpoint").onclick = function() {
 		let titulo = document.getElementById("titulo").value;
 		let endpoint = document.getElementById("endpoint").value;
@@ -76,7 +76,7 @@ function saveEdition() {
 						clearChecked('item-check');
 					}
 					modal('flex', 'Os dados foram salvos com sucesso', 'cabecalho-sucesso');
-					backToHome('fechar');
+					backToHome("fechar", "edition_endpoints", "home_endpoints");
 				} else {
 					modal('flex', 'Ocorreu um erro e não possível salvar', 'cabecalho-erro');
 				}
@@ -85,18 +85,64 @@ function saveEdition() {
 	}
 }
 
-function backToHome(identificador) {
+function saveToken() {
+	document.getElementById('salvarToken').onclick = function () {
+		let titulo = document.getElementById("titulo").value;
+		let status = document.getElementById("status").value;
+		let identificador = document.getElementById("identificador").value;
+		let servidor = document.getElementById("servidor").value;
+		let uri = document.getElementById("uri").value;
+
+		if (titulo == '') {
+			modal('flex', 'Os campos marcados com (*), são obrigatórios', 'cabecalho-erro');
+		} else {
+			let ajax = new XMLHttpRequest();
+			ajax.open("POST", servidor + uri, true);
+			ajax.setRequestHeader("Content-type", "application/x-www-form-urlencoded");
+			ajax.send(
+				"titulo=" + titulo +
+				"&status=" + status +
+				"&identificador=" + identificador
+			);
+			
+			ajax.onreadystatechange = function() {
+				if (ajax.status == 200) {
+					if (identificador == '0') {
+						clearInput('titulo', '');
+						clearInput('status', '1');
+					}
+					modal('flex', 'Os dados foram salvos com sucesso', 'cabecalho-sucesso');
+					backToHome("fechar", "edition_tokens", "home_tokens");
+				} else {
+					modal('flex', 'Ocorreu um erro e não possível salvar', 'cabecalho-erro');
+				}
+			}
+		}
+	}
+}
+
+function backToHome(identificador, pagina_atual, redirecionamento) {
 	document.getElementById(identificador).onclick = function() {
 		let servidor = document.getElementById("servidor").value;
 		let uri = document.getElementById("uri").value;
 		let url_atual = servidor + uri;
-		let url_nova = changeTerm(url_atual, "editar", "consultar");
+		let url_nova = changeTerm(url_atual, pagina_atual, redirecionamento);
 		redirect(url_nova);
 	}
 }
 
 window.onload = function() {
-	modal();
-	saveEdition();
-	backToHome('cancelarEndpoint');
+	if (window.uri) {
+		if (window.uri.value == '/estudo-plugins-wordpress/wp-admin/admin.php?page=edition_endpoints') {
+			modal();
+			saveEndpoint();
+			backToHome("cancelarEndpoint", "edition_endpoints", "home_endpoints");
+		}
+	
+		if (window.uri.value == '/estudo-plugins-wordpress/wp-admin/admin.php?page=edition_tokens') {
+			modal();
+			saveToken();
+			backToHome("cancelarToken", "edition_tokens", "home_tokens");
+		}
+	}
 }

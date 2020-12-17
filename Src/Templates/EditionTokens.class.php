@@ -3,17 +3,23 @@ namespace Templates;
 
 use Shared\Header;
 use Shared\Route;
-use Source\Endpoints;
+use Source\Tokens;
 use Source\Terms;
 use Interfaces\IEditionTokens;
 use Libs\Modal;
 use Libs\Input;
 use Libs\Select;
-use Libs\Checkbox;
 use Libs\Hidden;
 use Libs\Button;
 
 class EditionTokens implements IEditionTokens {
+
+	private static function get_options_select() {
+		return array(
+			[ "value" => "1", "option" => "Sim" ],
+			[ "value" => "0", "option" => "Não" ]
+		);
+	}
 	
 	private static function input($titulo, $name, $id, $value = '', $class = 'input-text') {
 		Input::set_titulo($titulo);
@@ -22,6 +28,16 @@ class EditionTokens implements IEditionTokens {
 		Input::set_value($value);
 		Input::set_class($class);
 		return Input::input();
+	}
+
+	private static function select($titulo, $name, $id, $options, $value = '', $class = 'input-text') {
+		Select::set_titulo($titulo);
+		Select::set_name($name);
+		Select::set_id($id);
+		Select::set_options($options);
+		Select::set_value($value);
+		Select::set_class($class);
+		return Select::select();
 	}
 	
 	private static function hidden($id, $value) {
@@ -42,21 +58,22 @@ class EditionTokens implements IEditionTokens {
 		$html = Modal::modal() .
 			"<div class='content-plugin'>
 				" . Header::header() . "
-				<h1>Adicionando endpoint</h1>
+				<h1>Adicionando token</h1>
 				<p>Todos os campos marcados com <b>(*)</b> são de preenchimento obrigatório</p>
-				" . self::input('Título do endpoint (*)', 'titulo', 'titulo') . "
+				" . self::input('Título do token (*)', 'titulo', 'titulo') . "
+				" . self::select('Deve estar ativo?', 'status', 'status', self::get_options_select()) . "
 				" . self::hidden('identificador', Route::identificator()) . "
 				" . self::hidden('servidor', Route::servidor()) . "
 				" . self::hidden('uri', Route::uri()) . "
 				" . self::button('Salvar', 'salvarToken', 'salvarToken') . "
-				" . self::button('Cancelar', 'cancelarEndpoint', 'cancelarEndpoint', 'cancel-button') . "
+				" . self::button('Cancelar', 'cancelarToken', 'cancelarToken', 'cancel-button') . "
 			</div>
 		";
 		return $html;
 	}
 	
 	public static function new() {
-		//Endpoints::insert();
+		Tokens::insert();
 		echo self::html();
 	}
 	

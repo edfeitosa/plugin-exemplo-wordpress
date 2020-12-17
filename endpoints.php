@@ -45,6 +45,7 @@ function tokens_table($table_data) {
 	return 'CREATE TABLE IF NOT EXISTS ' . $table_data['tokens'] . ' (
 		`tok_id` int(11) AUTO_INCREMENT PRIMARY KEY,
 		`tok_title` varchar(255) NOT NULL,
+		`tok_token` varchar(255) NOT NULL,
 		`tok_status` tinyint(1) NOT NULL DEFAULT 1,
 		`tok_user` varchar(100) NOT NULL,
 		`tok_date` timestamp NOT NULL DEFAULT CURRENT_TIMESTAMP
@@ -84,10 +85,10 @@ add_action('admin_menu', 'add_custom_menu_item');
 
 function add_custom_menu_item() {
 	global $home, $create;
-	add_menu_page('', 'Endpoints', 'manage_options', 'homeEndpoints', 'home_endpoints', 'dashicons-privacy');
-	add_submenu_page('homeEndpoints', '', 'Novo Endpoint', 'manage_options', 'edition_endpoints', 'edition_endpoints');
-	add_submenu_page('homeEndpoints', '', 'Tokens', 'manage_options', 'home_tokens', 'home_tokens');
-	add_submenu_page('homeEndpoints', '', 'Novo Token', 'manage_options', 'edition_tokens', 'edition_tokens');
+	add_menu_page('', 'Endpoints', 'manage_options', 'home_endpoints', 'home_endpoints', 'dashicons-privacy');
+	add_submenu_page('home_endpoints', '', 'Novo Endpoint', 'manage_options', 'edition_endpoints', 'edition_endpoints');
+	add_submenu_page('home_endpoints', '', 'Tokens', 'manage_options', 'home_tokens', 'home_tokens');
+	add_submenu_page('home_endpoints', '', 'Novo Token', 'manage_options', 'edition_tokens', 'edition_tokens');
 }
 
 function home_endpoints() { Templates\HomeEndpoints::home(); }
