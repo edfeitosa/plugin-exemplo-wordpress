@@ -17,6 +17,17 @@ $cinza-escuro: #333;
 	cursor: pointer;
 }
 
+@mixin button-tr() {
+	padding: 5px;
+	color: #fff;
+	float: left;
+	width: 20px;
+	height: 20px;
+	border-radius: 4px;
+	margin-right: 10px;
+	cursor: pointer;
+}
+
 .cabecalho-plugin {
 	padding: 5px 0px 5px 20px;
 	margin-left: -20px;
@@ -169,4 +180,40 @@ $cinza-escuro: #333;
 	margin-top: 2px;
 	border-radius: 4px;
 	width: 600px;
+}
+
+.table {
+	background-color: #fff;
+	padding: 5px;
+	border-radius: 4px;
+	width: 98%;
+
+	thead {
+		background-color: #f1f1f1;
+		font-weight: 700;
+		color:rgba(0, 0, 0, 0.5);
+
+		td {
+			padding: 10px 0px 10px 5px;
+		}
+	}
+
+	tbody {
+		color:rgba(0, 0, 0, 0.7);
+
+		td {
+			padding: 10px 0px 10px 5px;
+			border-bottom: 1px solid #f1f1f1;
+
+			.edit {
+				@include button-tr();
+				background-color: #F1CA00;
+			}
+
+			.delete {
+				@include button-tr();
+				background-color: #f00;
+			}
+		}
+	}
 }

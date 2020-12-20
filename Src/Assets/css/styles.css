@@ -162,4 +162,48 @@
   width: 600px;
 }
 
+.table {
+  background-color: #fff;
+  padding: 5px;
+  border-radius: 4px;
+  width: 98%;
+}
+.table thead {
+  background-color: #f1f1f1;
+  font-weight: 700;
+  color: rgba(0, 0, 0, 0.5);
+}
+.table thead td {
+  padding: 10px 0px 10px 5px;
+}
+.table tbody {
+  color: rgba(0, 0, 0, 0.7);
+}
+.table tbody td {
+  padding: 10px 0px 10px 5px;
+  border-bottom: 1px solid #f1f1f1;
+}
+.table tbody td .edit {
+  padding: 5px;
+  color: #fff;
+  float: left;
+  width: 20px;
+  height: 20px;
+  border-radius: 4px;
+  margin-right: 10px;
+  cursor: pointer;
+  background-color: #F1CA00;
+}
+.table tbody td .delete {
+  padding: 5px;
+  color: #fff;
+  float: left;
+  width: 20px;
+  height: 20px;
+  border-radius: 4px;
+  margin-right: 10px;
+  cursor: pointer;
+  background-color: #f00;
+}
+
 /*# sourceMappingURL=styles.css.map */

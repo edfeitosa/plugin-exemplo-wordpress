@@ -30,9 +30,9 @@ class Posts implements IPosts {
       " . self::query_categories($categories) . "
     ";
 
-    $result = array();
-
     $data = $wpdb->get_results($query);
+
+    $result = array();
 
     foreach($data as $item) {
       array_push($result, [

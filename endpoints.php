@@ -104,14 +104,14 @@ add_action(
 			'/api/(?P<endpoint>[a-zA-Z0-9 .\-]+)',
 			array(
 				'methods' => 'GET',
-				'callback' => 'get_endpoint',
+				'callback' => 'get_api',
 				'args' => array('endpoint')
 				)
 			);
 		}
 	);
 	
-function get_endpoint() { Source\Endpoints::get_endpoint(); }
+function get_api() { Source\Endpoints::get_api(); }
 
 function remove_upgrade_nag() {
 	echo '<style type="text/css"> .update-nag {display: none} </style>';

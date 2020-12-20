@@ -56,7 +56,7 @@ class Endpoints implements IEndpoints {
 	public static function insert() {
 		global $wpdb;
 		if (isset($_POST['titulo'])) {
-			$clean_uri = self::sanitize_string($_POST['endpoint']);
+			$clean_uri = self::sanitize_string(trim(strip_tags($_POST['endpoint']), "\n"));
 			
 			$wpdb->insert(
           $wpdb->prefix . PREFIX_PLUGIN . 'uri',
@@ -72,7 +72,32 @@ class Endpoints implements IEndpoints {
 		}
 	}
 
-	public static function get_endpoint() {
+	public static function get_endpoints() {
+		global $wpdb;
+
+		$query = "SELECT uri_id, uri_title, uri_endpoint, uri_date FROM " . $wpdb->prefix ."endpoints_uri";
+
+		$data = $wpdb->get_results($query);
+
+		if (count($data) == 0) {
+			return false;
+		}
+
+		$result = array();
+
+		foreach($data as $item) {
+			array_push($result, [
+        "identificador" => $item->uri_id,
+        "titulo" => $item->uri_title,
+        "endpoint" => $item->uri_endpoint,
+        "data" => date('d/m/Y H:m:i', strtotime($item->uri_date))
+      ]);
+		}
+
+		return $result;
+	}
+
+	public static function get_api() {
 		$headers = apache_request_headers();
 
 		if (!self::exists_authorization($headers)) {
