@@ -1,7 +1,7 @@
 .cabecalho-plugin {
   padding: 5px 0px 5px 20px;
   margin-left: -20px;
-  background-color: #009842;
+  background-color: #004b34;
   color: #FFCF28;
 }
 
@@ -34,7 +34,7 @@
   width: 50%;
 }
 .content-plugin .input-button {
-  background-color: #009842;
+  background-color: #004b34;
   color: #fff;
   font-size: 0.85rem;
   font-weight: 700;
@@ -106,7 +106,7 @@
   justify-content: space-between;
 }
 .bg-modal .modal .cabecalho-sucesso {
-  background-color: #009842;
+  background-color: #004b34;
   font-weight: 700;
   font-size: 1.1rem;
   color: #fff;
