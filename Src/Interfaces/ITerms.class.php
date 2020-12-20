@@ -3,6 +3,6 @@ namespace Interfaces;
 
 interface ITerms {
 
-  public static function getTerms();
+  public static function get_terms();
 
 } ?>

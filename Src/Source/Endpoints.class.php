@@ -5,6 +5,7 @@ use Shared\Route;
 use Shared\Response;
 use Interfaces\IEndpoints;
 use Source\Tokens;
+use Source\Posts;
 
 class Endpoints implements IEndpoints {
 
@@ -35,7 +36,13 @@ class Endpoints implements IEndpoints {
 
 	private static function resources($endpoint) {
 		global $wpdb;
-		$data = $wpdb->get_results("select uri_resources from " . $wpdb->prefix ."endpoints_uri where uri_endpoint = '$endpoint' and uri_status = '1'");
+
+		$query = "
+			SELECT uri_resources FROM " . $wpdb->prefix ."endpoints_uri 
+			WHERE uri_endpoint = '$endpoint' AND uri_status = '1'
+		";
+
+		$data = $wpdb->get_results($query);
 
 		if (count($data) == 0) {
 			return false;
@@ -46,11 +53,26 @@ class Endpoints implements IEndpoints {
 		}
 	}
 
-	public static function get_endpoint() {
-		/* echo self::verify_endpoint();
-		if (isset($_GET['categoria'])) { echo $_GET['categoria']; }
-		if (isset($_GET['id'])) { echo $_GET['id']; } */
+	public static function insert() {
+		global $wpdb;
+		if (isset($_POST['titulo'])) {
+			$clean_uri = self::sanitize_string($_POST['endpoint']);
+			
+			$wpdb->insert(
+          $wpdb->prefix . PREFIX_PLUGIN . 'uri',
+          array(
+						'uri_title' => $_POST['titulo'],
+						'uri_endpoint' => $clean_uri,
+						'uri_status' => $_POST['status'],
+						'uri_user' => get_current_user_id(),
+						'uri_resources' => $_POST['resources']
+          ),
+          array('%s', '%s', '%s', '%s', '%s')
+			);
+		}
+	}
 
+	public static function get_endpoint() {
 		$headers = apache_request_headers();
 
 		if (!self::exists_authorization($headers)) {
@@ -71,29 +93,26 @@ class Endpoints implements IEndpoints {
 			Response::set_code(404);
 			Response::response(array('erro' => 'recurso não encontrado'));
 			exit();
-		} else {
-			echo $resources;
 		}
-		
-	}
-	
-	public static function insert() {
-		global $wpdb;
-		if (isset($_POST['titulo'])) {
-			$clean_uri = self::sanitize_string($_POST['endpoint']);
-			
-			$wpdb->insert(
-          $wpdb->prefix . PREFIX_PLUGIN . 'uri',
-          array(
-						'uri_title' => $_POST['titulo'],
-						'uri_endpoint' => $clean_uri,
-						'uri_status' => $_POST['status'],
-						'uri_user' => get_current_user_id(),
-						'uri_resources' => $_POST['resources']
-          ),
-          array('%s', '%s', '%s', '%s', '%s')
-			);
+
+		$categories = (isset($_GET['categoria'])) ? $_GET['categoria'] : $resources;
+
+		if (!in_array($categories, explode(',', $resources)) && isset($_GET['categoria'])) {
+			Response::set_code(404);
+			Response::response(array('erro' => 'informações não encontradas'));
+			exit();
 		}
+
+		$result = Posts::get_posts($categories);
+
+		if (count($result) <= 0) {
+			Response::set_code(404);
+			Response::response(array('erro' => 'informações não encontradas'));
+			exit();
+		}
+
+		Response::set_code(200);
+		Response::response($result);
 	}
 	
 } ?>

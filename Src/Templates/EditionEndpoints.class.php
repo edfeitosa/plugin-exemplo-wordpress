@@ -72,7 +72,7 @@ class EditionEndpoints implements IEditionEndpoints {
 				" . self::input('Título do endpoint (*)', 'titulo', 'titulo') . "
 				" . self::input('URI do endponint (*)', 'endpoint', 'endpoint') . "
 				" . self::select('Deve estar ativo?', 'status', 'status', self::get_options_select()) . "
-				" . self::checkbox('O que pode ser acessado? (*)', Terms::getTerms()) . "
+				" . self::checkbox('O que pode ser acessado? (*)', Terms::get_terms()) . "
 				<p style='margin-top: -7px;'>
 					A categoria não está na lista? 
 					<a href='edit-tags.php?taxonomy=category'>Clique aqui</a> 

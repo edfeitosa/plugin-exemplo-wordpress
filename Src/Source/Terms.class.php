@@ -5,9 +5,9 @@ use Interfaces\ITerms;
 
 class Terms implements ITerms {
 
-  public static function getTerms() {
+  public static function get_terms() {
     global $wpdb;
-		$categories = $wpdb->get_results("select * from $wpdb->terms where slug <> 'sem-categoria'");
+		$categories = $wpdb->get_results("SELECT * FROM $wpdb->terms WHERE slug <> 'sem-categoria'");
 		$optionsCheckbox = array();
 		foreach ($categories as $item) {
 			array_push($optionsCheckbox, [
