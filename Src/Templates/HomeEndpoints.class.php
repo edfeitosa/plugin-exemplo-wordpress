@@ -74,17 +74,9 @@ class HomeEndpoints implements IHomeEndpoints {
 		";
 		return $html;
 	}
-
-	private static function body() {
-		$html = "
-			<p>Endpoints cadastrados</p>" .
-			self::table_list() .
-		"";
-		return $html;
-	}
 	
 	public static function home() {
-		echo self::header() . self::body();
+		echo self::header() . self::table_list();
 	}
 	
 } ?>
